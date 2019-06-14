@@ -1,0 +1,58 @@
+Sub Stocks()
+
+  Dim Stock_Name As String
+
+  Dim Stock_Volume As Double
+  Stock_Volume = 0
+
+  Dim Yearly_Change As Double
+  Yearly_Change = 0
+
+  Dim Percent_Change As Double
+  Percent_Change = 0
+
+  Dim Counter As Integer
+  Counter = 0
+
+  Dim Summary_Table_Row As Long
+  Summary_Table_Row = 2
+
+  For i = 2 To 797711
+
+    If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+
+      Stock_Name = Cells(i, 1).Value
+
+      Stock_Volume = Stock_Volume + Cells(i, 7).Value
+
+      Yearly_Change = Cells(i, 6).Value - Cells((i - Counter), 3).Value
+
+      Percent_Change = (Yearly_Change / Cells((i - Counter), 3).Value)
+
+      Range("I" & Summary_Table_Row).Value = Stock_Name
+
+      Range("J" & Summary_Table_Row).Value = Yearly_Change
+
+      Range("K" & Summary_Table_Row).Value = Percent_Change
+
+      Range("L" & Summary_Table_Row).Value = Stock_Volume
+
+      Summary_Table_Row = Summary_Table_Row + 1
+      
+      Stock_Volume = 0
+
+      Yearly_Change = 0
+
+      Counter = 0
+
+    Else
+
+      Stock_Volume = Stock_Volume + Cells(i, 7).Value
+
+      Counter = Counter + 1
+
+    End If
+
+  Next i
+
+End Sub
